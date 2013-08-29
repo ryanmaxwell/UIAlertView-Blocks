@@ -3,7 +3,7 @@ UIAlertViewBlocks
 
 Category on UIAlertView to use inline block callbacks instead of delegate callbacks.
 
-UIAlertView was created in a time before blocks, ARC, and judging by it’s naming - touch screens. Who “clicks” on an alert view anyway?
+UIAlertView was created in a time before blocks, ARC, and judging by its naming – touch screens too. Who “clicks” on an alert view anyway?
 
 Lets modernize this shizzle with some blocks goodness.
 
