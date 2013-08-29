@@ -32,6 +32,23 @@ If you need further customization, use the longer method:
              onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
               onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
 ```
+## Example
+
+```objc
+[UIAlertView showAlertWithTitle:@"Drink Selection"
+                        message:@"Choose a refreshing beverage"
+              cancelButtonTitle:@"Cancel"
+              otherButtonTitles:@[@"Beer", @"Wine"]
+                     completion:^(UIAlertView *alertView, NSUInteger buttonIndex) {
+                         if (buttonIndex == [alertView cancelButtonIndex]) {
+                             NSLog(@"Cancelled");
+                         } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Beer"]) {
+                             NSLog(@"Have a cold beer");
+                         } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Wine"]) {
+                             NSLog(@"Have a glass of chardonnay");
+                         }
+                     }];
+```
 
 ## Requirements
 
