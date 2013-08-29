@@ -33,6 +33,10 @@ If you need further customization, use the longer method:
               onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
 ```
 
+## Requirements
+
+ARC - so iOS 4.3 or later
+
 ## Usage
 
 Add `UIAlertView+Blocks.h/m` and `UIAlertViewBlocksDelegate.h/m` into your project, or `pod 'UIAlertViewBlocks'` using CocoaPods.

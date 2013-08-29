@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/ryanmaxwell/UIAlertViewBlocks"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Ryan Maxwell" => "ryanm@xwell.co.nz" }
-  s.platform     = :ios
+  s.platform     = :ios, '4.3'
   s.source       = { :git => "https://github.com/ryanmaxwell/UIAlertViewBlocks.git", :tag => "0.0.1" }
-  s.source_files  = '*.{h,m}'
+  s.source_files = '*.{h,m}'
   s.requires_arc = true
 end
