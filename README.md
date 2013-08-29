@@ -39,4 +39,4 @@ ARC - so iOS 4.3 or later
 
 ## Usage
 
-Add `UIAlertView+Blocks.h/m` and `UIAlertViewBlocksDelegate.h/m` into your project, or `pod 'UIAlertViewBlocks'` using CocoaPods.
+Add `UIAlertViewBlocks.h/m` into your project, or `pod 'UIAlertViewBlocks'` using CocoaPods.

@@ -1,5 +1,5 @@
 //
-//  UIAlertView+Blocks.h
+//  UIAlertViewBlocks.h
 //  UIAlertViewBlocks
 //
 //  Created by Ryan Maxwell on 29/08/13.
@@ -25,5 +25,16 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSUInteger b
          cancelButtonTitle:(NSString *)cancelButtonTitle
          otherButtonTitles:(NSArray *)otherButtonTitles
                 completion:(UIAlertViewCompletionBlock)onTap;
+
+@end
+
+@interface UIAlertViewBlocksDelegate : NSObject <UIAlertViewDelegate>
+
++ (instancetype)sharedInstance;
+
+- (void)setOnTapBlock:(UIAlertViewCompletionBlock)onTap
+   onWillDismissBlock:(UIAlertViewCompletionBlock)onWillDismiss
+    onDidDismissBlock:(UIAlertViewCompletionBlock)onDidDismiss
+         forAlertView:(UIAlertView *)alertView;
 
 @end
