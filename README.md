@@ -32,3 +32,7 @@ If you need further customization, use the longer method:
              onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
               onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
 ```
+
+## Usage
+
+Add `UIAlertView+Blocks.h/m` and `UIAlertViewBlocksDelegate.h/m` into your project, or `pod 'UIAlertViewBlocks'` using CocoaPods.
