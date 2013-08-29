@@ -27,14 +27,3 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSUInteger b
                 completion:(UIAlertViewCompletionBlock)onTap;
 
 @end
-
-@interface UIAlertViewBlocksDelegate : NSObject <UIAlertViewDelegate>
-
-+ (instancetype)sharedInstance;
-
-- (void)setOnTapBlock:(UIAlertViewCompletionBlock)onTap
-   onWillDismissBlock:(UIAlertViewCompletionBlock)onWillDismiss
-    onDidDismissBlock:(UIAlertViewCompletionBlock)onDidDismiss
-         forAlertView:(UIAlertView *)alertView;
-
-@end
