@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Ryan Maxwell. All rights reserved.
 //
 
-#import "UIAlertViewBlocks.h"
+#import "UIAlertView+Blocks.h"
 
 @interface UIAlertViewBlocksManager : NSObject <UIAlertViewDelegate>
 
