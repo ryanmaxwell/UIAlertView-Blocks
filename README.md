@@ -14,40 +14,40 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSUInteger b
  Do it all in a single call:
 
 ```objc
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-         otherButtonTitles:(NSArray *)otherButtonTitles
-                completion:(UIAlertViewCompletionBlock)onTap;
++ (void)showWithTitle:(NSString *)title
+              message:(NSString *)message
+    cancelButtonTitle:(NSString *)cancelButtonTitle
+    otherButtonTitles:(NSArray *)otherButtonTitles
+           completion:(UIAlertViewCompletionBlock)onTap;
 ```
 
 If you need further customization, use the longer method:
 
 ```objc
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-         otherButtonTitles:(NSArray *)otherButtonTitles
-                     onTap:(UIAlertViewCompletionBlock)onTap
-             onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
-              onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
++ (void)showWithTitle:(NSString *)title
+              message:(NSString *)message
+    cancelButtonTitle:(NSString *)cancelButtonTitle
+    otherButtonTitles:(NSArray *)otherButtonTitles
+                onTap:(UIAlertViewCompletionBlock)onTap
+        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
+         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
 ```
 ## Example
 
 ```objc
-[UIAlertView showAlertWithTitle:@"Drink Selection"
-                        message:@"Choose a refreshing beverage"
-              cancelButtonTitle:@"Cancel"
-              otherButtonTitles:@[@"Beer", @"Wine"]
-                     completion:^(UIAlertView *alertView, NSUInteger buttonIndex) {
-                         if (buttonIndex == [alertView cancelButtonIndex]) {
-                             NSLog(@"Cancelled");
-                         } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Beer"]) {
-                             NSLog(@"Have a cold beer");
-                         } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Wine"]) {
-                             NSLog(@"Have a glass of chardonnay");
-                         }
-                     }];
+[UIAlertView showWithTitle:@"Drink Selection"
+                   message:@"Choose a refreshing beverage"
+         cancelButtonTitle:@"Cancel"
+         otherButtonTitles:@[@"Beer", @"Wine"]
+                completion:^(UIAlertView *alertView, NSUInteger buttonIndex) {
+                    if (buttonIndex == [alertView cancelButtonIndex]) {
+                        NSLog(@"Cancelled");
+                    } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Beer"]) {
+                        NSLog(@"Have a cold beer");
+                    } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Wine"]) {
+                        NSLog(@"Have a glass of chardonnay");
+                    }
+                }];
 ```
 
 ## Requirements

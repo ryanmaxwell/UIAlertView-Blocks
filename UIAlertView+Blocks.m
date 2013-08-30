@@ -1,5 +1,5 @@
 //
-//  UIAlertViewBlocks.m
+//  UIAlertView+Blocks.m
 //  UIAlertViewBlocks
 //
 //  Created by Ryan Maxwell on 29/08/13.
@@ -8,7 +8,7 @@
 
 #import "UIAlertViewBlocks.h"
 
-@interface UIAlertViewBlocksDelegate : NSObject <UIAlertViewDelegate>
+@interface UIAlertViewBlocksManager : NSObject <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *onTapBlocks;
 @property (strong, nonatomic) NSMutableDictionary *onWillDismissBlocks;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation UIAlertViewBlocksDelegate
+@implementation UIAlertViewBlocksManager
 
 + (instancetype)sharedInstance {
     static id instance = nil;
@@ -108,17 +108,17 @@
 
 @implementation UIAlertView (Blocks)
 
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-         otherButtonTitles:(NSArray *)otherButtonTitles
-                     onTap:(UIAlertViewCompletionBlock)onTap
-             onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
-              onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss {
++ (void)showWithTitle:(NSString *)title
+              message:(NSString *)message
+    cancelButtonTitle:(NSString *)cancelButtonTitle
+    otherButtonTitles:(NSArray *)otherButtonTitles
+                onTap:(UIAlertViewCompletionBlock)onTap
+        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
+         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss {
     
     UIAlertView *alertView = [[self alloc] initWithTitle:title
                                                  message:message
-                                                delegate:[UIAlertViewBlocksDelegate sharedInstance]
+                                                delegate:[UIAlertViewBlocksManager sharedInstance]
                                        cancelButtonTitle:cancelButtonTitle
                                        otherButtonTitles:nil];
     
@@ -127,25 +127,25 @@
     }
     
     if (onTap) {
-        [[UIAlertViewBlocksDelegate sharedInstance] setOnTapBlock:onTap onWillDismissBlock:onWillDismiss onDidDismissBlock:onDidDismiss forAlertView:alertView];
+        [[UIAlertViewBlocksManager sharedInstance] setOnTapBlock:onTap onWillDismissBlock:onWillDismiss onDidDismissBlock:onDidDismiss forAlertView:alertView];
     }
     
     [alertView show];
 }
 
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-         otherButtonTitles:(NSArray *)otherButtonTitles
-                completion:(UIAlertViewCompletionBlock)onTap {
++ (void)showWithTitle:(NSString *)title
+              message:(NSString *)message
+    cancelButtonTitle:(NSString *)cancelButtonTitle
+    otherButtonTitles:(NSArray *)otherButtonTitles
+           completion:(UIAlertViewCompletionBlock)onTap {
     
-    [self showAlertWithTitle:title
-                     message:message
-           cancelButtonTitle:cancelButtonTitle
-           otherButtonTitles:otherButtonTitles
-                       onTap:onTap
-               onWillDismiss:nil
-                onDidDismiss:nil];
+    [self showWithTitle:title
+                message:message
+      cancelButtonTitle:cancelButtonTitle
+      otherButtonTitles:otherButtonTitles
+                  onTap:onTap
+          onWillDismiss:nil
+           onDidDismiss:nil];
 }
 
 @end
