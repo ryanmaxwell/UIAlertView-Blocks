@@ -8,10 +8,10 @@ UIAlertView was created in a time before blocks, ARC, and judging by its naming 
 Lets modernize this shizzle with some blocks goodness.
 
 ```objc
-typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSUInteger buttonIndex);
+typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger buttonIndex);
 ```
 
- Do it all in a single call:
+Create and show the alert in a single call:
 
 ```objc
 + (void)showWithTitle:(NSString *)title
@@ -57,3 +57,7 @@ ARC - so iOS 4.3 or later
 ## Usage
 
 Add `UIAlertView+Blocks.h/m` into your project, or `pod 'UIAlertViewBlocks'` using CocoaPods.
+
+## Action Sheets
+
+If you’d like similar functionality on UIActionSheet too, check out twin-sister [UIActionSheetBlocks](https://github.com/ryanmaxwell/UIActionSheetBlocks).
