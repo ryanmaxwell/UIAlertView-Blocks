@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSUInteger buttonIndex);
+typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger buttonIndex);
 
 @interface UIAlertView (Blocks)
 
