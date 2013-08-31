@@ -118,7 +118,7 @@
     
     UIAlertView *alertView = [[self alloc] initWithTitle:title
                                                  message:message
-                                                delegate:[UIAlertViewBlocksManager sharedInstance]
+                                                delegate:nil
                                        cancelButtonTitle:cancelButtonTitle
                                        otherButtonTitles:nil];
     
@@ -126,7 +126,8 @@
         [alertView addButtonWithTitle:buttonTitle];
     }
     
-    if (onTap) {
+    if (onTap || onWillDismiss || onDidDismiss) {
+        alertView.delegate = [UIAlertViewBlocksManager sharedInstance];
         [[UIAlertViewBlocksManager sharedInstance] setOnTapBlock:onTap onWillDismissBlock:onWillDismiss onDidDismissBlock:onDidDismiss forAlertView:alertView];
     }
     

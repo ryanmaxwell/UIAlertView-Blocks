@@ -16,14 +16,14 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
               message:(NSString *)message
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
-                onTap:(UIAlertViewCompletionBlock)onTap
-        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
-         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
+           completion:(UIAlertViewCompletionBlock)onTap;
 
 + (void)showWithTitle:(NSString *)title
               message:(NSString *)message
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
-           completion:(UIAlertViewCompletionBlock)onTap;
+                onTap:(UIAlertViewCompletionBlock)onTap
+        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
+         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
 
 @end
