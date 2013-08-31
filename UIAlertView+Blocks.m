@@ -138,13 +138,13 @@
               message:(NSString *)message
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
-           completion:(UIAlertViewCompletionBlock)onTap {
+           completion:(UIAlertViewCompletionBlock)completion {
     
     [self showWithTitle:title
                 message:message
       cancelButtonTitle:cancelButtonTitle
       otherButtonTitles:otherButtonTitles
-                  onTap:onTap
+                  onTap:completion
           onWillDismiss:nil
            onDidDismiss:nil];
 }
