@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Ryan Maxwell" => "ryanm@xwell.co.nz" }
   s.platform     = :ios, '4.3'
-  s.source       = { :git => "https://github.com/ryanmaxwell/UIAlertViewBlocks.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/ryanmaxwell/UIAlertViewBlocks.git", :tag => "0.0.2" }
   s.source_files = '*.{h,m}'
   s.requires_arc = true
 end
