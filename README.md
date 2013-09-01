@@ -20,7 +20,7 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
 @property (copy, nonatomic) UIAlertViewBlock cancelBlock;
 ```
 
-You can create and show the alert in a single call with the below class method:
+You can create and show an alert in a single call, e.g.
 
 ```objc
 [UIAlertView showWithTitle:@"Drink Selection"
@@ -38,7 +38,7 @@ You can create and show the alert in a single call with the below class method:
                   }];
 ```
 
-If you need further customization, you can create and configure an alert as you usually would, and then assign blocks to the alert:
+If you need further customization, you can create and configure an alert as you usually would, and then assign blocks to the alert, e.g.
 
 ```objc
 UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sign in to my awesome service"
