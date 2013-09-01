@@ -61,7 +61,7 @@ av.cancelBlock = ^(UIAlertView *alertView) {
 [av show];
 ```
 
-If a delegate was set on the alert view, the delegate will be preserved and the blocks will be executed _before_ the delegate’s methods is called.
+If a delegate was set on the alert view, the delegate will be preserved and the blocks will be executed _before_ the delegate is called.
 
 ## Requirements
 
