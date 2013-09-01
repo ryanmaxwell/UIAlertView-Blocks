@@ -44,6 +44,8 @@ static char kUIAlertViewCancelBlockKey;
     [alertView show];
 }
 
+#pragma mark -
+
 - (UIAlertViewCompletionBlock)tapBlock {
     return objc_getAssociatedObject(self, &kUIAlertViewTapBlockKey);
 }
