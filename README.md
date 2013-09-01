@@ -27,15 +27,15 @@ You can create and show the alert in a single call with the below class method:
                    message:@"Choose a refreshing beverage"
          cancelButtonTitle:@"Cancel"
          otherButtonTitles:@[@"Beer", @"Wine"]
-                completion:^(UIAlertView *alertView, NSUInteger buttonIndex) {
-                    if (buttonIndex == [alertView cancelButtonIndex]) {
-                        NSLog(@"Cancelled");
-                    } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Beer"]) {
-                        NSLog(@"Have a cold beer");
-                    } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Wine"]) {
-                        NSLog(@"Have a glass of chardonnay");
-                    }
-                }];
+                  tapBlock:^(UIAlertView *alertView, NSUInteger buttonIndex) {
+                      if (buttonIndex == [alertView cancelButtonIndex]) {
+                          NSLog(@"Cancelled");
+                      } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Beer"]) {
+                          NSLog(@"Have a cold beer");
+                      } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Wine"]) {
+                          NSLog(@"Have a glass of chardonnay");
+                      }
+                  }];
 ```
 
 If you need further customization, you can create and configure an alert as you usually would, and then assign blocks to the alert:
