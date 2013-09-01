@@ -25,7 +25,7 @@ static char kUIAlertViewCancelBlockKey;
               message:(NSString *)message
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
-           completion:(UIAlertViewCompletionBlock)completion {
+             tapBlock:(UIAlertViewCompletionBlock)tapBlock {
     
     UIAlertView *alertView = [[self alloc] initWithTitle:title
                                                  message:message
@@ -37,9 +37,9 @@ static char kUIAlertViewCancelBlockKey;
         [alertView addButtonWithTitle:buttonTitle];
     }
     
-    if (completion) {
+    if (tapBlock) {
         alertView.delegate = self;
-        alertView.tapBlock = completion;
+        alertView.tapBlock = tapBlock;
     }
     
     [alertView show];
