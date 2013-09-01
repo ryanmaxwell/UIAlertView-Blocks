@@ -8,31 +8,19 @@ UIAlertView was created in a time before blocks, ARC, and judging by its naming 
 Lets modernize this shizzle with some blocks goodness.
 
 ```objc
+typedef void (^UIAlertViewBlock) (UIAlertView *alertView);
 typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger buttonIndex);
+
+@property (copy, nonatomic) UIAlertViewCompletionBlock tapBlock;
+@property (copy, nonatomic) UIAlertViewCompletionBlock willDismissBlock;
+@property (copy, nonatomic) UIAlertViewCompletionBlock didDismissBlock;
+
+@property (copy, nonatomic) UIAlertViewBlock willPresentBlock;
+@property (copy, nonatomic) UIAlertViewBlock didPresentBlock;
+@property (copy, nonatomic) UIAlertViewBlock cancelBlock;
 ```
 
-Create and show the alert in a single call:
-
-```objc
-+ (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-           completion:(UIAlertViewCompletionBlock)onTap;
-```
-
-If you need further customization, use the longer method:
-
-```objc
-+ (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-                onTap:(UIAlertViewCompletionBlock)onTap
-        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
-         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
-```
-## Example
+You can create and show the alert in a single call with the below class method:
 
 ```objc
 [UIAlertView showWithTitle:@"Drink Selection"
@@ -49,6 +37,31 @@ If you need further customization, use the longer method:
                     }
                 }];
 ```
+
+If you need further customization, you can create and configure an alert as you usually would, and then assign blocks to the alert:
+
+```objc
+UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sign in to my awesome service"
+                                             message:@"I promise I won’t steal your password"
+                                            delegate:self
+                                   cancelButtonTitle:@"Cancel"
+                                   otherButtonTitles:@"OK", nil];
+
+av.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+
+av.tapBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
+    NSLog(@"Username: %@", [[alertView textFieldAtIndex:0] text]);
+    NSLog(@"Password: %@", [[alertView textFieldAtIndex:1] text]);
+};
+
+av.cancelBlock = ^(UIAlertView *alertView) {
+    NSLog(@"Cancelled.");
+};
+
+[av show];
+```
+
+If a delegate was set on the alert view, the delegate will be preserved and the blocks will be executed _before_ the delegate’s methods is called.
 
 ## Requirements
 

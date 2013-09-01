@@ -8,103 +8,16 @@
 
 #import "UIAlertView+Blocks.h"
 
-@interface UIAlertViewBlocksManager : NSObject <UIAlertViewDelegate>
+#import <objc/runtime.h>
 
-@property (strong, nonatomic) NSMutableDictionary *onTapBlocks;
-@property (strong, nonatomic) NSMutableDictionary *onWillDismissBlocks;
-@property (strong, nonatomic) NSMutableDictionary *onDidDismissBlocks;
+static char kUIAlertViewOriginalDelegateKey;
 
-+ (instancetype)sharedInstance;
-
-- (void)setOnTapBlock:(UIAlertViewCompletionBlock)onTap
-   onWillDismissBlock:(UIAlertViewCompletionBlock)onWillDismiss
-    onDidDismissBlock:(UIAlertViewCompletionBlock)onDidDismiss
-         forAlertView:(UIAlertView *)alertView;
-
-@end
-
-@implementation UIAlertViewBlocksManager
-
-+ (instancetype)sharedInstance {
-    static id instance = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[self alloc] init];
-    });
-    
-    return instance;
-}
-
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        _onTapBlocks = [NSMutableDictionary dictionary];
-        _onWillDismissBlocks = [NSMutableDictionary dictionary];
-        _onDidDismissBlocks = [NSMutableDictionary dictionary];
-    }
-    return self;
-}
-
-- (void)setOnTapBlock:(UIAlertViewCompletionBlock)onTap
-   onWillDismissBlock:(UIAlertViewCompletionBlock)onWillDismiss
-    onDidDismissBlock:(UIAlertViewCompletionBlock)onDidDismiss
-         forAlertView:(UIAlertView *)alertView {
-    NSString *hashString = [NSString stringWithFormat:@"%d", alertView.hash];
-    
-    if (onTap) {
-        self.onTapBlocks[hashString] = onTap;
-    }
-    if (onWillDismiss) {
-        self.onWillDismissBlocks[hashString] = onWillDismiss;
-    }
-    if (onDidDismiss) {
-        self.onDidDismissBlocks[hashString] = onDidDismiss;
-    }
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *hashString = [NSString stringWithFormat:@"%d", alertView.hash];
-    
-    UIAlertViewCompletionBlock completion = self.onTapBlocks[hashString];
-    
-    if (completion) {
-        completion(alertView, buttonIndex);
-        
-        [self.onTapBlocks removeObjectForKey:hashString];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSString *hashString = [NSString stringWithFormat:@"%d", alertView.hash];
-    
-    UIAlertViewCompletionBlock completion = self.onWillDismissBlocks[hashString];
-    
-    if (completion) {
-        completion(alertView, buttonIndex);
-        
-        [self.onWillDismissBlocks removeObjectForKey:hashString];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    alertView.delegate = nil;
-    
-    NSString *hashString = [NSString stringWithFormat:@"%d", alertView.hash];
-    
-    UIAlertViewCompletionBlock completion = self.onDidDismissBlocks[hashString];
-    
-    if (completion) {
-        completion(alertView, buttonIndex);
-        
-        [self.onDidDismissBlocks removeObjectForKey:hashString];
-    }
-}
-
-@end
+static char kUIAlertViewTapBlockKey;
+static char kUIAlertViewWillPresentBlockKey;
+static char kUIAlertViewDidPresentBlockKey;
+static char kUIAlertViewWillDismissBlockKey;
+static char kUIAlertViewDidDismissBlockKey;
+static char kUIAlertViewCancelBlockKey;
 
 @implementation UIAlertView (Blocks)
 
@@ -112,9 +25,7 @@
               message:(NSString *)message
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
-                onTap:(UIAlertViewCompletionBlock)onTap
-        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
-         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss {
+           completion:(UIAlertViewCompletionBlock)completion {
     
     UIAlertView *alertView = [[self alloc] initWithTitle:title
                                                  message:message
@@ -126,27 +37,187 @@
         [alertView addButtonWithTitle:buttonTitle];
     }
     
-    if (onTap || onWillDismiss || onDidDismiss) {
-        alertView.delegate = [UIAlertViewBlocksManager sharedInstance];
-        [[UIAlertViewBlocksManager sharedInstance] setOnTapBlock:onTap onWillDismissBlock:onWillDismiss onDidDismissBlock:onDidDismiss forAlertView:alertView];
+    if (completion) {
+        alertView.delegate = self;
+        alertView.tapBlock = completion;
     }
     
     [alertView show];
 }
 
-+ (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-           completion:(UIAlertViewCompletionBlock)completion {
+- (UIAlertViewCompletionBlock)tapBlock {
+    return objc_getAssociatedObject(self, &kUIAlertViewTapBlockKey);
+}
+
+- (void)setTapBlock:(UIAlertViewCompletionBlock)tapBlock {
     
-    [self showWithTitle:title
-                message:message
-      cancelButtonTitle:cancelButtonTitle
-      otherButtonTitles:otherButtonTitles
-                  onTap:completion
-          onWillDismiss:nil
-           onDidDismiss:nil];
+    if (self.delegate != self) {
+        objc_setAssociatedObject(self, &kUIAlertViewOriginalDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = self;
+    }
+    
+    objc_setAssociatedObject(self, &kUIAlertViewTapBlockKey, tapBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (UIAlertViewCompletionBlock)willDismissBlock {
+    return objc_getAssociatedObject(self, &kUIAlertViewWillDismissBlockKey);
+}
+
+- (void)setWillDismissBlock:(UIAlertViewCompletionBlock)willDismissBlock {
+    
+    if (self.delegate != self) {
+        objc_setAssociatedObject(self, &kUIAlertViewOriginalDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = self;
+    }
+    
+    objc_setAssociatedObject(self, &kUIAlertViewWillDismissBlockKey, willDismissBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (UIAlertViewCompletionBlock)didDismissBlock {
+    return objc_getAssociatedObject(self, &kUIAlertViewDidDismissBlockKey);
+}
+
+- (void)setDidDismissBlock:(UIAlertViewCompletionBlock)didDismissBlock {
+    
+    if (self.delegate != self) {
+        objc_setAssociatedObject(self, &kUIAlertViewOriginalDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = self;
+    }
+    
+    objc_setAssociatedObject(self, &kUIAlertViewDidDismissBlockKey, didDismissBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (UIAlertViewBlock)willPresentBlock {
+    return objc_getAssociatedObject(self, &kUIAlertViewWillPresentBlockKey);
+}
+
+- (void)setWillPresentBlock:(UIAlertViewBlock)willPresentBlock {
+    
+    if (self.delegate != self) {
+        objc_setAssociatedObject(self, &kUIAlertViewOriginalDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = self;
+    }
+    
+    objc_setAssociatedObject(self, &kUIAlertViewWillPresentBlockKey, willPresentBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (UIAlertViewBlock)didPresentBlock {
+    return objc_getAssociatedObject(self, &kUIAlertViewDidPresentBlockKey);
+}
+
+- (void)setDidPresentBlock:(UIAlertViewBlock)didPresentBlock {
+    
+    if (self.delegate != self) {
+        objc_setAssociatedObject(self, &kUIAlertViewOriginalDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = self;
+    }
+    
+    objc_setAssociatedObject(self, &kUIAlertViewDidPresentBlockKey, didPresentBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (UIAlertViewBlock)cancelBlock {
+    return objc_getAssociatedObject(self, &kUIAlertViewCancelBlockKey);
+}
+
+- (void)setCancelBlock:(UIAlertViewBlock)cancelBlock {
+    
+    if (self.delegate != self) {
+        objc_setAssociatedObject(self, &kUIAlertViewOriginalDelegateKey, self.delegate, OBJC_ASSOCIATION_ASSIGN);
+        self.delegate = self;
+    }
+    
+    objc_setAssociatedObject(self, &kUIAlertViewCancelBlockKey, cancelBlock, OBJC_ASSOCIATION_COPY);
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)willPresentAlertView:(UIAlertView *)alertView {
+    UIAlertViewBlock block = alertView.willPresentBlock;
+    
+    if (block) {
+        block(alertView);
+    }
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(willPresentAlertView:)]) {
+        [originalDelegate willPresentAlertView:alertView];
+    }
+}
+
+- (void)didPresentAlertView:(UIAlertView *)alertView {
+    UIAlertViewBlock block = alertView.didPresentBlock;
+    
+    if (block) {
+        block(alertView);
+    }
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(didPresentAlertView:)]) {
+        [originalDelegate didPresentAlertView:alertView];
+    }
+}
+
+
+- (void)alertViewCancel:(UIAlertView *)alertView {
+    UIAlertViewBlock block = alertView.cancelBlock;
+    
+    if (block) {
+        block(alertView);
+    }
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(alertViewCancel:)]) {
+        [originalDelegate alertViewCancel:alertView];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    UIAlertViewCompletionBlock completion = alertView.tapBlock;
+    
+    if (completion) {
+        completion(alertView, buttonIndex);
+    }
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+        [originalDelegate alertView:alertView clickedButtonAtIndex:buttonIndex];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    UIAlertViewCompletionBlock completion = alertView.willDismissBlock;
+    
+    if (completion) {
+        completion(alertView, buttonIndex);
+    }
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)]) {
+        [originalDelegate alertView:alertView willDismissWithButtonIndex:buttonIndex];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    UIAlertViewCompletionBlock completion = alertView.didDismissBlock;
+    
+    if (completion) {
+        completion(alertView, buttonIndex);
+    }
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)]) {
+        [originalDelegate alertView:alertView didDismissWithButtonIndex:buttonIndex];
+    }
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    
+    id originalDelegate = objc_getAssociatedObject(self, &kUIAlertViewOriginalDelegateKey);
+    if (originalDelegate && [originalDelegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)]) {
+        return [originalDelegate alertViewShouldEnableFirstOtherButton:alertView];
+    }
+    
+    return YES;
 }
 
 @end

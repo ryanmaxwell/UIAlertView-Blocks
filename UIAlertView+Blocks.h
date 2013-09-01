@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^UIAlertViewBlock) (UIAlertView *alertView);
 typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger buttonIndex);
 
 @interface UIAlertView (Blocks)
@@ -18,12 +19,12 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
     otherButtonTitles:(NSArray *)otherButtonTitles
            completion:(UIAlertViewCompletionBlock)completion;
 
-+ (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-                onTap:(UIAlertViewCompletionBlock)onTap
-        onWillDismiss:(UIAlertViewCompletionBlock)onWillDismiss
-         onDidDismiss:(UIAlertViewCompletionBlock)onDidDismiss;
+@property (copy, nonatomic) UIAlertViewCompletionBlock tapBlock;
+@property (copy, nonatomic) UIAlertViewCompletionBlock willDismissBlock;
+@property (copy, nonatomic) UIAlertViewCompletionBlock didDismissBlock;
+
+@property (copy, nonatomic) UIAlertViewBlock willPresentBlock;
+@property (copy, nonatomic) UIAlertViewBlock didPresentBlock;
+@property (copy, nonatomic) UIAlertViewBlock cancelBlock;
 
 @end
