@@ -38,7 +38,6 @@ static char kUIAlertViewCancelBlockKey;
     }
     
     if (tapBlock) {
-        alertView.delegate = self;
         alertView.tapBlock = tapBlock;
     }
     
