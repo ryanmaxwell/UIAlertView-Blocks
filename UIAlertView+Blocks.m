@@ -10,7 +10,7 @@
 
 #import <objc/runtime.h>
 
-static const void *UIAlertViewOriginalDelegateKey = &UIAlertViewOriginalDelegateKey;
+static const void *UIAlertViewOriginalDelegateKey   = &UIAlertViewOriginalDelegateKey;
 
 static const void *UIAlertViewTapBlockKey           = &UIAlertViewTapBlockKey;
 static const void *UIAlertViewWillPresentBlockKey   = &UIAlertViewWillPresentBlockKey;
