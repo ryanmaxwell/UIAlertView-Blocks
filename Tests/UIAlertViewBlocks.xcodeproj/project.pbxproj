@@ -60,7 +60,7 @@
 		946F2FF417DA9A4000EBB2F1 /* UIAlertViewBlocksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewBlocksTests.m; sourceTree = "<group>"; };
 		946F2FFE17DA9A9500EBB2F1 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+Blocks.h"; path = "../UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		946F2FFF17DA9A9500EBB2F1 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+Blocks.m"; path = "../UIAlertView+Blocks.m"; sourceTree = "<group>"; };
-		946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIAlertViewBlocks copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks-ARC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIAlertViewBlocks-ARC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		946F301217DA9BCC00EBB2F1 /* UIAlertViewBlocks copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "UIAlertViewBlocks copy-Info.plist"; path = "/Users/ryan/Code/UIAlertViewBlocks/Tests/UIAlertViewBlocks copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +116,7 @@
 			children = (
 				946F2FCC17DA9A3F00EBB2F1 /* UIAlertViewBlocks.app */,
 				946F2FE717DA9A4000EBB2F1 /* UIAlertViewBlocksTests.xctest */,
-				946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks copy.app */,
+				946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks-ARC.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -224,7 +224,7 @@
 			);
 			name = "UIAlertViewBlocks-ARC";
 			productName = UIAlertViewBlocks;
-			productReference = 946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks copy.app */;
+			productReference = 946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks-ARC.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -495,8 +495,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIAlertViewBlocks/UIAlertViewBlocks-Prefix.pch";
-				INFOPLIST_FILE = "UIAlertViewBlocks copy-Info.plist";
-				PRODUCT_NAME = "UIAlertViewBlocks copy";
+				INFOPLIST_FILE = "$(SRCROOT)/UIAlertViewBlocks/UIAlertViewBlocks-Info.plist";
+				PRODUCT_NAME = "UIAlertViewBlocks-ARC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -509,8 +509,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIAlertViewBlocks/UIAlertViewBlocks-Prefix.pch";
-				INFOPLIST_FILE = "UIAlertViewBlocks copy-Info.plist";
-				PRODUCT_NAME = "UIAlertViewBlocks copy";
+				INFOPLIST_FILE = "$(SRCROOT)/UIAlertViewBlocks/UIAlertViewBlocks-Info.plist";
+				PRODUCT_NAME = "UIAlertViewBlocks-ARC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
