@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.author       = { "Ryan Maxwell" => "ryanm@xwell.co.nz" }
   s.platform     = :ios, '4.3'
   s.source       = { :git => "https://github.com/ryanmaxwell/UIAlertViewBlocks.git", :tag => "0.0.3" }
-  s.source_files = '*.{h,m}'
+  s.source_files = 'UIAlertView+Blocks.{h,m}'
   s.requires_arc = true
 end
