@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "946F300217DA9BCC00EBB2F1"
-               BuildableName = "UIAlertViewBlocks copy.app"
+               BuildableName = "UIAlertViewBlocks-ARC.app"
                BlueprintName = "UIAlertViewBlocks-ARC"
                ReferencedContainer = "container:UIAlertViewBlocks.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "946F300217DA9BCC00EBB2F1"
-            BuildableName = "UIAlertViewBlocks copy.app"
+            BuildableName = "UIAlertViewBlocks-ARC.app"
             BlueprintName = "UIAlertViewBlocks-ARC"
             ReferencedContainer = "container:UIAlertViewBlocks.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "946F300217DA9BCC00EBB2F1"
-            BuildableName = "UIAlertViewBlocks copy.app"
+            BuildableName = "UIAlertViewBlocks-ARC.app"
             BlueprintName = "UIAlertViewBlocks-ARC"
             ReferencedContainer = "container:UIAlertViewBlocks.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "946F300217DA9BCC00EBB2F1"
-            BuildableName = "UIAlertViewBlocks copy.app"
+            BuildableName = "UIAlertViewBlocks-ARC.app"
             BlueprintName = "UIAlertViewBlocks-ARC"
             ReferencedContainer = "container:UIAlertViewBlocks.xcodeproj">
          </BuildableReference>

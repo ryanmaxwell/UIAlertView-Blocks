@@ -61,7 +61,6 @@
 		946F2FFE17DA9A9500EBB2F1 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+Blocks.h"; path = "../UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		946F2FFF17DA9A9500EBB2F1 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+Blocks.m"; path = "../UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		946F301117DA9BCC00EBB2F1 /* UIAlertViewBlocks-ARC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIAlertViewBlocks-ARC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		946F301217DA9BCC00EBB2F1 /* UIAlertViewBlocks copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "UIAlertViewBlocks copy-Info.plist"; path = "/Users/ryan/Code/UIAlertViewBlocks/Tests/UIAlertViewBlocks copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +106,6 @@
 				946F2FEE17DA9A4000EBB2F1 /* UIAlertViewBlocksTests */,
 				946F2FCE17DA9A3F00EBB2F1 /* Frameworks */,
 				946F2FCD17DA9A3F00EBB2F1 /* Products */,
-				946F301217DA9BCC00EBB2F1 /* UIAlertViewBlocks copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
