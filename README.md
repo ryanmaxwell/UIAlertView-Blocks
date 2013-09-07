@@ -63,9 +63,13 @@ av.cancelBlock = ^(UIAlertView *alertView) {
 
 If a delegate was set on the alert view, the delegate will be preserved and the blocks will be executed _before_ the delegate is called.
 
-## Requirements
+## Category Requirements
 
-Blocks - so iOS 4.0 or later. Compatible with both ARC and traditional retain/release code.
+Blocks and ARC - so iOS 4.3 or later.
+
+## Test Project Requirements
+
+* The Xcode test project uses the XCTest framework and so requires >= Xcode 5
 
 ## Usage
 
