@@ -21,6 +21,8 @@
 		946F2FF517DA9A4000EBB2F1 /* UIAlertViewBlocksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946F2FF417DA9A4000EBB2F1 /* UIAlertViewBlocksTests.m */; };
 		946F300017DA9A9500EBB2F1 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 946F2FFF17DA9A9500EBB2F1 /* UIAlertView+Blocks.m */; };
 		946F300117DA9A9500EBB2F1 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 946F2FFF17DA9A9500EBB2F1 /* UIAlertView+Blocks.m */; };
+		94C0CB2C17DAE69B002CBD10 /* TestAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C0CB2A17DAE69B002CBD10 /* TestAlertViewController.m */; };
+		94C0CB2D17DAE69B002CBD10 /* TestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C0CB2B17DAE69B002CBD10 /* TestAlertViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,9 @@
 		946F2FF417DA9A4000EBB2F1 /* UIAlertViewBlocksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewBlocksTests.m; sourceTree = "<group>"; };
 		946F2FFE17DA9A9500EBB2F1 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+Blocks.h"; path = "../UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		946F2FFF17DA9A9500EBB2F1 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+Blocks.m"; path = "../UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		94C0CB2917DAE69B002CBD10 /* TestAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAlertViewController.h; sourceTree = "<group>"; };
+		94C0CB2A17DAE69B002CBD10 /* TestAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAlertViewController.m; sourceTree = "<group>"; };
+		94C0CB2B17DAE69B002CBD10 /* TestAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestAlertViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +118,9 @@
 		946F2FD517DA9A3F00EBB2F1 /* UIAlertViewBlocks */ = {
 			isa = PBXGroup;
 			children = (
+				94C0CB2917DAE69B002CBD10 /* TestAlertViewController.h */,
+				94C0CB2A17DAE69B002CBD10 /* TestAlertViewController.m */,
+				94C0CB2B17DAE69B002CBD10 /* TestAlertViewController.xib */,
 				946F2FDE17DA9A3F00EBB2F1 /* AppDelegate.h */,
 				946F2FDF17DA9A3F00EBB2F1 /* AppDelegate.m */,
 				946F2FE117DA9A4000EBB2F1 /* Images.xcassets */,
@@ -226,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946F2FDA17DA9A3F00EBB2F1 /* InfoPlist.strings in Resources */,
+				94C0CB2D17DAE69B002CBD10 /* TestAlertViewController.xib in Resources */,
 				946F2FE217DA9A4000EBB2F1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +257,7 @@
 				946F300017DA9A9500EBB2F1 /* UIAlertView+Blocks.m in Sources */,
 				946F2FE017DA9A3F00EBB2F1 /* AppDelegate.m in Sources */,
 				946F2FDC17DA9A3F00EBB2F1 /* main.m in Sources */,
+				94C0CB2C17DAE69B002CBD10 /* TestAlertViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,24 +7,17 @@
 //
 
 #import "AppDelegate.h"
-#import "UIAlertView+Blocks.h"
+#import "TestAlertViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _viewController = [[TestAlertViewController alloc] initWithNibName:nil bundle:nil];
     
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
-    [UIAlertView showWithTitle:@"Test"
-                       message:@"Test Message"
-             cancelButtonTitle:@"Cancel"
-             otherButtonTitles:@[@"One", @"Two"]
-                      tapBlock:^(UIAlertView *alertView, NSInteger index){
-                          NSLog(@"Tapped '%@' at index %d", [alertView buttonTitleAtIndex:index], index);
-    }];
     
     return YES;
 }
