@@ -42,6 +42,9 @@ static const void *UIAlertViewCancelBlockKey        = &UIAlertViewCancelBlockKey
     }
     
     [alertView show];
+#if !__has_feature(objc_arc)
+    [alertView release];
+#endif
 }
 
 #pragma mark -
