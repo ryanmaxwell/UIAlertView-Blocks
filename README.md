@@ -69,7 +69,7 @@ Blocks and ARC - so iOS 4.3 or later.
 
 ## Test Project Requirements
 
-* The Xcode test project uses the XCTest framework and so requires >= Xcode 5
+The Xcode test project uses the XCTest framework and so requires >= Xcode 5
 
 ## Usage
 
