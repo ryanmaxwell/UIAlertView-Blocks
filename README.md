@@ -65,7 +65,7 @@ If a delegate was set on the alert view, the delegate will be preserved and the 
 
 ## Requirements
 
-ARC - so iOS 4.3 or later
+Blocks - so iOS 4.0 or later. Compatible with both ARC and traditional retain/release code.
 
 ## Usage
 
