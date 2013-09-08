@@ -1,4 +1,4 @@
-UIAlertViewBlocks
+UIAlertView+Blocks
 =================
 
 Category on UIAlertView to use inline block callbacks instead of delegate callbacks.
@@ -73,8 +73,8 @@ The Xcode test project uses the XCTest framework and so requires >= Xcode 5.
 
 ## Usage
 
-Add `UIAlertView+Blocks.h/m` into your project, or `pod 'UIAlertViewBlocks'` using CocoaPods.
+Add `UIAlertView+Blocks.h/m` into your project, or `pod 'UIAlertView+Blocks'` using CocoaPods.
 
 ## Action Sheets
 
-If you’d like similar functionality on UIActionSheet too, check out twin-sister [UIActionSheetBlocks](https://github.com/ryanmaxwell/UIActionSheetBlocks).
+If you’d like similar functionality on UIActionSheet too, check out twin-sister [UIActionSheet+Blocks](https://github.com/ryanmaxwell/UIActionSheet-Blocks).
