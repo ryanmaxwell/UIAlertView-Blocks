@@ -18,6 +18,8 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
 @property (copy, nonatomic) UIAlertViewBlock willPresentBlock;
 @property (copy, nonatomic) UIAlertViewBlock didPresentBlock;
 @property (copy, nonatomic) UIAlertViewBlock cancelBlock;
+
+@property (copy, nonatomic) BOOL(^shouldEnableFirstOtherButtonBlock)(UIAlertView *alertView);
 ```
 
 You can create and show an alert in a single call, e.g.
@@ -56,6 +58,10 @@ av.tapBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
 
 av.cancelBlock = ^(UIAlertView *alertView) {
     NSLog(@"Cancelled.");
+};
+
+av.shouldEnableFirstOtherButtonBlock = ^BOOL(UIAlertView *alertView) {
+    return ([[[alertView textFieldAtIndex:1] text] length] > 0);
 };
 
 [av show];

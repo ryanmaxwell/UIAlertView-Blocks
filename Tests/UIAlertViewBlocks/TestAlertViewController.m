@@ -18,13 +18,28 @@
 @implementation TestAlertViewController
 
 - (IBAction)showAlert:(id)sender {
-    [UIAlertView showWithTitle:@"Test"
-                       message:@"Test Message"
-             cancelButtonTitle:@"Cancel"
-             otherButtonTitles:@[@"One", @"Two"]
-                      tapBlock:^(UIAlertView *alertView, NSInteger index){
-                          NSLog(@"Tapped '%@' at index %d", [alertView buttonTitleAtIndex:index], index);
-                      }];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sign in to my awesome service"
+                                                 message:@"I promise I won’t steal your password"
+                                                delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"OK", nil];
+    
+    av.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    
+    av.tapBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
+        NSLog(@"Username: %@", [[alertView textFieldAtIndex:0] text]);
+        NSLog(@"Password: %@", [[alertView textFieldAtIndex:1] text]);
+    };
+    
+    av.cancelBlock = ^(UIAlertView *alertView) {
+        NSLog(@"Cancelled.");
+    };
+    
+    av.shouldEnableFirstOtherButtonBlock = ^BOOL(UIAlertView *alertView){
+        return ([[[alertView textFieldAtIndex:1] text] length] > 0);
+    };
+    
+    [av show];
 }
 
 @end

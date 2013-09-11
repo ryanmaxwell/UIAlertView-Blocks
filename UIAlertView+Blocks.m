@@ -10,14 +10,15 @@
 
 #import <objc/runtime.h>
 
-static const void *UIAlertViewOriginalDelegateKey   = &UIAlertViewOriginalDelegateKey;
+static const void *UIAlertViewOriginalDelegateKey                   = &UIAlertViewOriginalDelegateKey;
 
-static const void *UIAlertViewTapBlockKey           = &UIAlertViewTapBlockKey;
-static const void *UIAlertViewWillPresentBlockKey   = &UIAlertViewWillPresentBlockKey;
-static const void *UIAlertViewDidPresentBlockKey    = &UIAlertViewDidPresentBlockKey;
-static const void *UIAlertViewWillDismissBlockKey   = &UIAlertViewWillDismissBlockKey;
-static const void *UIAlertViewDidDismissBlockKey    = &UIAlertViewDidDismissBlockKey;
-static const void *UIAlertViewCancelBlockKey        = &UIAlertViewCancelBlockKey;
+static const void *UIAlertViewTapBlockKey                           = &UIAlertViewTapBlockKey;
+static const void *UIAlertViewWillPresentBlockKey                   = &UIAlertViewWillPresentBlockKey;
+static const void *UIAlertViewDidPresentBlockKey                    = &UIAlertViewDidPresentBlockKey;
+static const void *UIAlertViewWillDismissBlockKey                   = &UIAlertViewWillDismissBlockKey;
+static const void *UIAlertViewDidDismissBlockKey                    = &UIAlertViewDidDismissBlockKey;
+static const void *UIAlertViewCancelBlockKey                        = &UIAlertViewCancelBlockKey;
+static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertViewShouldEnableFirstOtherButtonBlockKey;
 
 @implementation UIAlertView (Blocks)
 
@@ -110,6 +111,15 @@ static const void *UIAlertViewCancelBlockKey        = &UIAlertViewCancelBlockKey
     objc_setAssociatedObject(self, UIAlertViewCancelBlockKey, cancelBlock, OBJC_ASSOCIATION_COPY);
 }
 
+- (void)setShouldEnableFirstOtherButtonBlock:(BOOL(^)(UIAlertView *alertView))shouldEnableFirstOtherButtonBlock {
+    [self _checkAlertViewDelegate];
+    objc_setAssociatedObject(self, UIAlertViewShouldEnableFirstOtherButtonBlockKey, shouldEnableFirstOtherButtonBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (BOOL(^)(UIAlertView *alertView))shouldEnableFirstOtherButtonBlock {
+    return objc_getAssociatedObject(self, UIAlertViewShouldEnableFirstOtherButtonBlockKey);
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)willPresentAlertView:(UIAlertView *)alertView {
@@ -192,6 +202,11 @@ static const void *UIAlertViewCancelBlockKey        = &UIAlertViewCancelBlockKey
 }
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    BOOL(^shouldEnableFirstOtherButtonBlock)(UIAlertView *alertView) = alertView.shouldEnableFirstOtherButtonBlock;
+    
+    if (shouldEnableFirstOtherButtonBlock) {
+        return shouldEnableFirstOtherButtonBlock(alertView);
+    }
     
     id originalDelegate = objc_getAssociatedObject(self, UIAlertViewOriginalDelegateKey);
     if (originalDelegate && [originalDelegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)]) {
