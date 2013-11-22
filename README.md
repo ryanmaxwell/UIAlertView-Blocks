@@ -52,12 +52,12 @@ UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sign in to my awesome ser
 av.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
 
 av.tapBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
-    NSLog(@"Username: %@", [[alertView textFieldAtIndex:0] text]);
-    NSLog(@"Password: %@", [[alertView textFieldAtIndex:1] text]);
-};
-
-av.cancelBlock = ^(UIAlertView *alertView) {
-    NSLog(@"Cancelled.");
+	if (buttonIndex == alertView.firstOtherButtonIndex) {
+		NSLog(@"Username: %@", [[alertView textFieldAtIndex:0] text]);
+    	NSLog(@"Password: %@", [[alertView textFieldAtIndex:1] text]);
+	} else if (buttonIndex == alertView.cancelButtonIndex) {
+		NSLog(@"Cancelled.");
+	}
 };
 
 av.shouldEnableFirstOtherButtonBlock = ^BOOL(UIAlertView *alertView) {

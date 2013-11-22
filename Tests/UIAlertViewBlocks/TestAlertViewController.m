@@ -27,11 +27,11 @@
     av.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     
     av.tapBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
-        if (buttonIndex == alertView.cancelButtonIndex) {
-            NSLog(@"Cancel button tapped.");
-        } else {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
             NSLog(@"Username: %@", [[alertView textFieldAtIndex:0] text]);
             NSLog(@"Password: %@", [[alertView textFieldAtIndex:1] text]);
+        } else if (buttonIndex == alertView.cancelButtonIndex) {
+            NSLog(@"Cancelled.");
         }
     };
     
