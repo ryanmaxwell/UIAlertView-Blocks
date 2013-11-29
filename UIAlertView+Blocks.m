@@ -48,6 +48,35 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
 #endif
 }
 
++ (void)showWithTitle:(NSString *)title
+              message:(NSString *)message
+   withAlertViewStyle:(UIAlertViewStyle)alertViewStyle
+    cancelButtonTitle:(NSString *)cancelButtonTitle
+    otherButtonTitles:(NSArray *)otherButtonTitles
+             tapBlock:(UIAlertViewCompletionBlock)tapBlock {
+    
+    UIAlertView *alertView = [[self alloc] initWithTitle:title
+                                                 message:message
+                                                delegate:nil
+                                       cancelButtonTitle:cancelButtonTitle
+                                       otherButtonTitles:nil];
+    
+    alertView.alertViewStyle = alertViewStyle;
+    
+    for (NSString *buttonTitle in otherButtonTitles) {
+        [alertView addButtonWithTitle:buttonTitle];
+    }
+    
+    if (tapBlock) {
+        alertView.tapBlock = tapBlock;
+    }
+    
+    [alertView show];
+#if !__has_feature(objc_arc)
+    [alertView release];
+#endif
+}
+
 #pragma mark -
 
 - (void)_checkAlertViewDelegate {
