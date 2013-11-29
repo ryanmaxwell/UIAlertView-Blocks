@@ -50,7 +50,7 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
 
 + (void)showWithTitle:(NSString *)title
               message:(NSString *)message
-   withAlertViewStyle:(UIAlertViewStyle)alertViewStyle
+       alertViewStyle:(UIAlertViewStyle)alertViewStyle
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
              tapBlock:(UIAlertViewCompletionBlock)tapBlock {
