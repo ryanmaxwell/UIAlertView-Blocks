@@ -24,7 +24,7 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
        alertViewStyle:(UIAlertViewStyle)alertViewStyle
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
-             tapBlock:(UIAlertViewCompletionBlock)tapBlock
+             tapBlock:(UIAlertViewCompletionBlock)tapBlock;
 
 @property (copy, nonatomic) UIAlertViewCompletionBlock tapBlock;
 @property (copy, nonatomic) UIAlertViewCompletionBlock willDismissBlock;
