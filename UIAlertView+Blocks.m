@@ -22,7 +22,7 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
 
 @implementation UIAlertView (Blocks)
 
-+ (void)showWithTitle:(NSString *)title
++ (UIAlertView*)showWithTitle:(NSString *)title
               message:(NSString *)message
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
@@ -42,36 +42,25 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
         alertView.tapBlock = tapBlock;
     }
     
-    [alertView show];
+    return alertView;
 #if !__has_feature(objc_arc)
     [alertView release];
 #endif
 }
 
-+ (void)showWithTitle:(NSString *)title
++ (UIAlertView*)showWithTitle:(NSString *)title
               message:(NSString *)message
        alertViewStyle:(UIAlertViewStyle)alertViewStyle
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
              tapBlock:(UIAlertViewCompletionBlock)tapBlock {
     
-    UIAlertView *alertView = [[self alloc] initWithTitle:title
-                                                 message:message
-                                                delegate:nil
-                                       cancelButtonTitle:cancelButtonTitle
-                                       otherButtonTitles:nil];
     
+    UIAlertView *alertView = [self showWithTitle:title message:message cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles tapBlock:tapBlock];
     alertView.alertViewStyle = alertViewStyle;
     
-    for (NSString *buttonTitle in otherButtonTitles) {
-        [alertView addButtonWithTitle:buttonTitle];
-    }
-    
-    if (tapBlock) {
-        alertView.tapBlock = tapBlock;
-    }
-    
-    [alertView show];
+    return alertView;
+
 #if !__has_feature(objc_arc)
     [alertView release];
 #endif
