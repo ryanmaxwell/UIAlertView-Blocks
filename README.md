@@ -29,7 +29,7 @@ You can create and show an alert in a single call, e.g.
                    message:@"Choose a refreshing beverage"
          cancelButtonTitle:@"Cancel"
          otherButtonTitles:@[@"Beer", @"Wine"]
-                  tapBlock:^(UIAlertView *alertView, NSUInteger buttonIndex) {
+                  tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                       if (buttonIndex == [alertView cancelButtonIndex]) {
                           NSLog(@"Cancelled");
                       } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Beer"]) {
