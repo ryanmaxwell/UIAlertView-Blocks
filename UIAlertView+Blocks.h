@@ -15,7 +15,7 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
 
 + (void)showWithTitle:(NSString *)title
               message:(NSString *)message
-               style :(UIAlertViewStyle) style
+                style:(UIAlertViewStyle)style
     cancelButtonTitle:(NSString *)cancelButtonTitle
     otherButtonTitles:(NSArray *)otherButtonTitles
              tapBlock:(UIAlertViewCompletionBlock)tapBlock;
