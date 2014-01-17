@@ -22,12 +22,12 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
 
 @implementation UIAlertView (Blocks)
 
-+ (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-                style:(UIAlertViewStyle)style
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-             tapBlock:(UIAlertViewCompletionBlock)tapBlock {
++ (instancetype)showWithTitle:(NSString *)title
+                      message:(NSString *)message
+                        style:(UIAlertViewStyle)style
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+            otherButtonTitles:(NSArray *)otherButtonTitles
+                     tapBlock:(UIAlertViewCompletionBlock)tapBlock {
     
     UIAlertView *alertView = [[self alloc] initWithTitle:title
                                                  message:message
@@ -48,25 +48,27 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
     }
     
     [alertView show];
-#if !__has_feature(objc_arc)
-    [alertView release];
-#endif
     
+#if !__has_feature(objc_arc)
+    return [alertView autorelease];
+#else
+    return alertView;
+#endif
 }
 
 
-+ (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-             tapBlock:(UIAlertViewCompletionBlock)tapBlock {
++ (instancetype)showWithTitle:(NSString *)title
+                      message:(NSString *)message
+            cancelButtonTitle:(NSString *)cancelButtonTitle
+            otherButtonTitles:(NSArray *)otherButtonTitles
+                     tapBlock:(UIAlertViewCompletionBlock)tapBlock {
     
-    [self showWithTitle:title
-                message:message
-                  style:UIAlertViewStyleDefault
-      cancelButtonTitle:cancelButtonTitle
-      otherButtonTitles:otherButtonTitles
-               tapBlock:tapBlock];
+    return [self showWithTitle:title
+                       message:message
+                         style:UIAlertViewStyleDefault
+             cancelButtonTitle:cancelButtonTitle
+             otherButtonTitles:otherButtonTitles
+                      tapBlock:tapBlock];
 }
 
 #pragma mark -
