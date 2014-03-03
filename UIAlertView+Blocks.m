@@ -67,7 +67,7 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
         alertView.tapBlock = tapBlock;
     }
     
-    [alertView show];
+    [alertView performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
     
 #if !__has_feature(objc_arc)
     return [alertView autorelease];
