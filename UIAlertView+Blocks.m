@@ -49,11 +49,13 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
             otherButtonTitles:(NSArray *)otherButtonTitles
                      tapBlock:(UIAlertViewCompletionBlock)tapBlock {
     
+    NSString *firstObject = [otherButtonTitles count] ? [otherButtonTitles objectAtIndex:0] : nil;
+    
     UIAlertView *alertView = [[self alloc] initWithTitle:title
                                                  message:message
                                                 delegate:nil
                                        cancelButtonTitle:cancelButtonTitle
-                                       otherButtonTitles:[otherButtonTitles firstObject], nil];
+                                       otherButtonTitles:firstObject, nil];
     
     alertView.alertViewStyle = style;
     
