@@ -33,6 +33,23 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
 
 @interface UIAlertView (Blocks)
 
+#pragma mark - Build
+
++ (instancetype)alertViewWithTitle:(NSString *)title
+                           message:(NSString *)message
+                             style:(UIAlertViewStyle)style
+                 cancelButtonTitle:(NSString *)cancelButtonTitle
+                 otherButtonTitles:(NSArray *)otherButtonTitles
+                          tapBlock:(UIAlertViewCompletionBlock)tapBlock;
+
++ (instancetype)alertViewWithTitle:(NSString *)title
+                           message:(NSString *)message
+                 cancelButtonTitle:(NSString *)cancelButtonTitle
+                 otherButtonTitles:(NSArray *)otherButtonTitles
+                          tapBlock:(UIAlertViewCompletionBlock)tapBlock;
+
+#pragma mark - Build and show
+
 + (instancetype)showWithTitle:(NSString *)title
                       message:(NSString *)message
                         style:(UIAlertViewStyle)style

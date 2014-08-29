@@ -42,40 +42,75 @@ static const void *UIAlertViewShouldEnableFirstOtherButtonBlockKey  = &UIAlertVi
 
 @implementation UIAlertView (Blocks)
 
+#pragma mark - Build
+
++ (instancetype)alertViewWithTitle:(NSString *)title
+                           message:(NSString *)message
+                             style:(UIAlertViewStyle)style
+                 cancelButtonTitle:(NSString *)cancelButtonTitle
+                 otherButtonTitles:(NSArray *)otherButtonTitles
+                          tapBlock:(UIAlertViewCompletionBlock)tapBlock {
+
+    NSString *firstObject = otherButtonTitles.count ? otherButtonTitles[0] : nil;
+
+    UIAlertView *alertView = [[self alloc] initWithTitle:title
+                                                 message:message
+                                                delegate:nil
+                                       cancelButtonTitle:cancelButtonTitle
+                                       otherButtonTitles:firstObject, nil];
+
+    alertView.alertViewStyle = style;
+
+    if (otherButtonTitles.count > 1) {
+        for (NSString *buttonTitle in [otherButtonTitles subarrayWithRange:NSMakeRange(1, otherButtonTitles.count - 1)]) {
+            [alertView addButtonWithTitle:buttonTitle];
+        }
+    }
+
+    if (tapBlock) {
+        alertView.tapBlock = tapBlock;
+    }
+
+#if !__has_feature(objc_arc)
+    return [alertView autorelease];
+#else
+    return alertView;
+#endif
+}
+
++ (instancetype)alertViewWithTitle:(NSString *)title
+                           message:(NSString *)message
+                 cancelButtonTitle:(NSString *)cancelButtonTitle
+                 otherButtonTitles:(NSArray *)otherButtonTitles
+                          tapBlock:(UIAlertViewCompletionBlock)tapBlock {
+
+    return [self alertViewWithTitle:title
+                            message:message
+                              style:UIAlertViewStyleDefault
+                  cancelButtonTitle:cancelButtonTitle
+                  otherButtonTitles:otherButtonTitles
+                           tapBlock:tapBlock];
+}
+
+#pragma mark - Buil and show
+
 + (instancetype)showWithTitle:(NSString *)title
                       message:(NSString *)message
                         style:(UIAlertViewStyle)style
             cancelButtonTitle:(NSString *)cancelButtonTitle
             otherButtonTitles:(NSArray *)otherButtonTitles
                      tapBlock:(UIAlertViewCompletionBlock)tapBlock {
-    
-    NSString *firstObject = otherButtonTitles.count ? otherButtonTitles[0] : nil;
-    
-    UIAlertView *alertView = [[self alloc] initWithTitle:title
-                                                 message:message
-                                                delegate:nil
-                                       cancelButtonTitle:cancelButtonTitle
-                                       otherButtonTitles:firstObject, nil];
-    
-    alertView.alertViewStyle = style;
-    
-    if (otherButtonTitles.count > 1) {
-        for (NSString *buttonTitle in [otherButtonTitles subarrayWithRange:NSMakeRange(1, otherButtonTitles.count - 1)]) {
-            [alertView addButtonWithTitle:buttonTitle];
-        }
-    }
-    
-    if (tapBlock) {
-        alertView.tapBlock = tapBlock;
-    }
-    
+
+    UIAlertView *alertView = [self alertViewWithTitle:title
+                                              message:message
+                                                style:style
+                                    cancelButtonTitle:cancelButtonTitle
+                                    otherButtonTitles:otherButtonTitles
+                                             tapBlock:tapBlock];
+
     [alertView show];
-    
-#if !__has_feature(objc_arc)
-    return [alertView autorelease];
-#else
+
     return alertView;
-#endif
 }
 
 
