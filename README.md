@@ -84,3 +84,7 @@ Add `UIAlertView+Blocks.h/m` into your project, or `pod 'UIAlertView+Blocks'` us
 ## Action Sheets
 
 If you’d like similar functionality on UIActionSheet too, check out twin-sister [UIActionSheet+Blocks](https://github.com/ryanmaxwell/UIActionSheet-Blocks).
+
+## iOS 8 and UIAlertController
+
+Check out [UIAlertController+Blocks](https://github.com/ryanmaxwell/UIAlertController-Blocks) if you would like to migrate to UIAlertController, and use a familiar API.
