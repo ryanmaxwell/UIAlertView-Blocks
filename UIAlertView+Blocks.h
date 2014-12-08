@@ -46,6 +46,10 @@ typedef void (^UIAlertViewCompletionBlock) (UIAlertView *alertView, NSInteger bu
             otherButtonTitles:(NSArray *)otherButtonTitles
                      tapBlock:(UIAlertViewCompletionBlock)tapBlock;
 
++ (instancetype)showWithTitle:(NSString *)title
+                      message:(NSString *)message
+                     tapBlock:(UIAlertViewCompletionBlock)tapBlock;
+
 @property (copy, nonatomic) UIAlertViewCompletionBlock tapBlock;
 @property (copy, nonatomic) UIAlertViewCompletionBlock willDismissBlock;
 @property (copy, nonatomic) UIAlertViewCompletionBlock didDismissBlock;
