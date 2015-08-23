@@ -81,6 +81,7 @@ The Xcode test project uses the XCTest framework and so requires >= Xcode 5.
 ## Usage
 
 Add `UIAlertView+Blocks.h/m` into your project, or `pod 'UIAlertView+Blocks'` using CocoaPods.
+In your code, either `#import <UIAlertView+Blocks/UIAlertView+Blocks.h>` (Objective-C header), `@import UIAlertView_Blocks;` (Objective-C module), or `import UIAlertView_Blocks` (Swift).
 
 ## Action Sheets
 
